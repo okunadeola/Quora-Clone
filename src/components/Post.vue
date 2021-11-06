@@ -272,8 +272,7 @@ export default {
     this.book = user[0].bookmark;
     let userPost = user[0].post;
     let username = user[0].username;
-    console.log(username);
-    console.log(userPost);
+
     user = user.map((info) => info.interest);
     user = user[0];
 
@@ -329,15 +328,18 @@ export default {
         store[index] = user;
         localStorage.setItem("quora", JSON.stringify(store));
 
+
+
         this.myFeed.unshift({
           postType: this.selected,
           postContent: this.postText,
           time: time,
           by: this.currentUser.username,
           comment: [],
-          id: user.post.length + 1,
+          id: this.myFeed.length + 1,
           likes: 0,
         });
+
 
         this.postText = "";
         this.selected = "";
@@ -533,11 +535,10 @@ export default {
         if (this.up[id] === undefined) {
           post.likes++;
           this.up[id] = true;
-          console.log(this.up[id]);
         } else if (this.up[id] === true) {
           post.likes--;
           this.up[id] = undefined;
-          console.log(this.up[id]);
+
         }
         let ind = storage.indexOf(postOwner);
         storage[ind] = postOwner;
@@ -546,19 +547,21 @@ export default {
         let disp = this.myFeed.find((val, ind) => ind === id);
         let ident = disp.id;
 
+
         let store = JSON.parse(localStorage.getItem("quora"));
         let user = store.find(
           (res) => res.username === this.currentUser.username
         );
         let post = user.post.find((val) => val.id === ident);
+
         if (this.down[id] === undefined) {
           post.likes++;
           this.down[id] = true;
-          console.log(this.down[id]);
+
         } else if (this.down[id] === true) {
           post.likes--;
           this.down[id] = undefined;
-          console.log(this.down[id]);
+
         }
         let index = store.indexOf(user);
         store[index] = user;
@@ -568,11 +571,11 @@ export default {
       if (this.front[id] === undefined) {
         key.likes++;
         this.front[id] = true;
-        console.log(this.front[id]);
+
       } else if (this.front[id] === true) {
         key.likes--;
         this.front[id] = undefined;
-        console.log(this.front[id]);
+
       }
     },
 
@@ -808,14 +811,6 @@ export default {
   },
 };
 </script>
-
-
-
-
-
-
-
-
 
 
 

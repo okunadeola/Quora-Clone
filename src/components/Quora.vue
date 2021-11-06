@@ -182,10 +182,11 @@ export default {
       bookmarkBy: "",
       bookmarkTime: "",
       option: [],
-      // bookmarkContent : "",
     };
   },
+  
   mounted: function() {
+    this.$store.dispatch({type:'closeNav'})
     let store = JSON.parse(localStorage.getItem("quora"));
     let user = store.find(
       (res) => Number(res.id) === Number(this.$route.params.id)
@@ -208,7 +209,7 @@ export default {
       let user = store.find((res) => res.username === this.username);
       user.interest.push(interest);
       this.mySpace.push(interest);
-      // this.currentUser.interest.push(interest)
+  
       user.space.splice(id, 1);
       let index = store.indexOf(user);
       store[index] = user;
